@@ -54,7 +54,7 @@ class Handler(Extract, GetPages):
         for url in urls:
             self.get_working_tree_api(url, 'tree')
             company_names = self.get_by_xpath(
-                f'//div[@class="grid-container"]/ul/li[2]/text()[contains(., "{searchquery}")]')
+                f'//div[@class="grid-container"]/ul/li[2]/text()[contains(translate(., "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"), "{searchquery.lower()}")]')
             if company_names:
                 for name in company_names:
                     addr = self.get_by_xpath(
